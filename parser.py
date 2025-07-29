@@ -44,7 +44,7 @@ def login_and_get_users_rows():
     return rows
 
 
-def print_table():
+def print_users():
     try:
         rows = login_and_get_users_rows()
         if not rows:
@@ -59,4 +59,4 @@ def print_table():
 
 
 if __name__ == '__main__':
-    print_table()
+    print_users()
