@@ -7,7 +7,6 @@ from logger import logger
 def login_and_get_users_rows():
     session = requests.Session()
 
-    logger.info('Получаем токен входа.')
     login_page = session.get(LOGIN_URL)
     soup = BeautifulSoup(login_page.text, 'html.parser')
     token_input = soup.find('input', {'name': 'token'})
@@ -26,7 +25,6 @@ def login_and_get_users_rows():
         'token': token
     }
 
-    logger.info('Выполняем авторизацию.')
     login_response = session.post(LOGIN_URL, data=login_data)
     if 'phpMyAdmin' not in login_response.text:
         logger.error('Ошибка авторизации.')
@@ -39,7 +37,6 @@ def login_and_get_users_rows():
     browse_page = session.get(browse_url)
     soup = BeautifulSoup(browse_page.text, 'html.parser')
     rows = soup.select('tbody tr')
-    logger.debug(f'Найдено строк: {len(rows)}')
 
     return rows
 
